@@ -15,6 +15,7 @@ export default function App() {
             <a
               href="https://github.com/kimtimke/react-dictionaryapp"
               target="_blank"
+              rel="noreferrer"
             >
               Github.
             </a>
