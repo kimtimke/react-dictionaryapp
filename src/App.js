@@ -10,7 +10,15 @@ export default function App() {
           <Dictionary />
         </main>
         <footer className="App-footer">
-          <small>Coded by Kim Timke</small>
+          <small>
+            Coded by Kim Timke and is open-sourced on{" "}
+            <a
+              href="https://github.com/kimtimke/react-dictionaryapp"
+              target="_blank"
+            >
+              Github.
+            </a>
+          </small>
         </footer>
       </div>
     </div>
