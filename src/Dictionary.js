@@ -10,24 +10,22 @@ export default function Dictionary(props) {
   let [loaded, setLoaded] = useState(false);
   let [photos, setPhotos] = useState(null);
 
-  function handleDictionaryResponse(response) {
-    setResults(response.data[0]);
-  }
-
-  function handlePexelsResponse(response) {
+  function handleImageResponse(response) {
     setPhotos(response.data.photos);
   }
 
-  function search() {
-    // documentation: https://api.dictionaryapi.dev/api/v2/entries/en/hello
-    let apiUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${keyword}`;
-    axios.get(apiUrl).then(handleDictionaryResponse);
+  function handleDictionaryResponse(response) {
+    setResults(response.data[0]);
+    let imageApiKey = "b5a355237t04ao67dd369fc7099f0aaf";
+    let imageApiUrl = `https://api.shecodes.io/images/v1/search?query=${response.data.word}&key=${imageApiKey}`;
+    let headers = { Authorization: `Bearer ${imageApiKey}` };
+    axios.get(imageApiUrl, { headers: headers }).then(handleImageResponse);
+  }
 
-    let pexelsApiKey =
-      "tsi9muOzHopc82EQJLulocUWjhiX6JIgnMUW6B0qid9LrivUfMRdVIhu";
-    let pexelsApiUrl = `https://api.pexels.com/v1/search?query=${keyword}&per_page=9`;
-    let headers = { Authorization: `Bearer ${pexelsApiKey}` };
-    axios.get(pexelsApiUrl, { headers: headers }).then(handlePexelsResponse);
+  function search() {
+    let apiKey = "b5a355237t04ao67dd369fc7099f0aaf";
+    let apiUrl = `https://api.shecodes.io/dictionary/v1/define?word=${keyword}&key=${apiKey}`;
+    axios.get(apiUrl).then(handleDictionaryResponse);
   }
 
   function handleSubmit(event) {
@@ -52,6 +50,8 @@ export default function Dictionary(props) {
           <form onSubmit={handleSubmit}>
             <input
               type="search"
+              placeholder="Search for a word"
+              autoFocus={true}
               onChange={handleKeywordChange}
               defaultValue={props.defaultKeyword}
             />
