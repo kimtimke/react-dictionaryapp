@@ -6,23 +6,13 @@ import "./Results.css";
 export default function Results(props) {
   if (props.results) {
     return (
-      <div className="Results">
+      <div className="Result">
         <section>
-          <h2>{props.results.word}</h2>
-          {props.results.phonetics
-            .filter(function (phonetic) {
-              return phonetic.audio;
-            })
-            .map(function (phonetic, index) {
-              return (
-                <div key={index}>
-                  {index < 1 ? <Phonetic phonetic={phonetic} /> : null}
-                </div>
-              );
-            })}
+          <h1>{props.results.word}</h1>
+          <Phonetic phonetic={props.definition.phonetic} />
         </section>
 
-        {props.results.meanings.map(function (meaning, index) {
+        {props.definition.meanings.map(function (meaning, index) {
           return (
             <section key={index}>
               <Meanings meaning={meaning} />
