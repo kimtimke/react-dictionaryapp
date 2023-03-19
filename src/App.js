@@ -18,7 +18,15 @@ export default function App() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Github.
+              Github
+            </a>{" "}
+            and hosted on
+            <a
+              href="https://reactdictionary-kimtimke.netlify.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Netlify.
             </a>
           </small>
         </footer>

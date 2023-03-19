@@ -13,11 +13,13 @@ export default function Dictionary(props) {
   function handleImageResponse(response) {
     setPhotos(response.data.photos);
   }
-
   function handleDictionaryResponse(response) {
-    setResults(response.data[0]);
+    setResults(response.data);
+  }
+
+  function searchImage() {
     let imageApiKey = "b5a355237t04ao67dd369fc7099f0aaf";
-    let imageApiUrl = `https://api.shecodes.io/images/v1/search?query=${response.data.word}&key=${imageApiKey}`;
+    let imageApiUrl = `https://api.shecodes.io/images/v1/search?query=${keyword}&key=${imageApiKey}`;
     let headers = { Authorization: `Bearer ${imageApiKey}` };
     axios.get(imageApiUrl, { headers: headers }).then(handleImageResponse);
   }
@@ -31,6 +33,7 @@ export default function Dictionary(props) {
   function handleSubmit(event) {
     event.preventDefault();
     search();
+    searchImage();
   }
 
   function handleKeywordChange(event) {
@@ -40,6 +43,7 @@ export default function Dictionary(props) {
   function load() {
     setLoaded(true);
     search();
+    searchImage();
   }
 
   if (loaded) {
